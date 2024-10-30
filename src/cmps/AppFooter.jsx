@@ -13,7 +13,7 @@ export function AppFooter() {
                 Currently {toysLength} toys in the shop
             </h5>
             <p>
-                Coffeerights to all
+                Coffeerights
             </p>
         </footer>
     )

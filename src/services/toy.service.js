@@ -6,15 +6,15 @@ import { httpService } from './http.service.js'
 const STORAGE_KEY = 'toyDB'
 const BASE_URL = 'toy/'
 
-// export const toyService = {
-//     query,
-//     getById,
-//     save,
-//     remove,
-//     getEmptyToy,
-//     getDefaultFilter,
-//     getRandomToy
-// }
+export const toyService = {
+    query,
+    getById,
+    save,
+    remove,
+    getEmptyToy,
+    getDefaultFilter,
+    getRandomToy
+}
 
 
 function query(filterBy = {}) {
@@ -44,7 +44,7 @@ function getEmptyToy() {
     return {
         name: '',
         price: '',
-        isInStock: 'all',
+        inStock: '',
         labels: [],
     }
 }
@@ -53,10 +53,9 @@ function getRandomToy() {
     const labelsList = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
         'Outdoor', 'Battery Powered']
     return {
-        _id: utilService.makeId(),
         name: 'Ball-' + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1000, 9000),
-        isInStock: (utilService.getRandomIntInclusive(0, 9) % 2 === 1) ? 'inStock' : 'outOfStock',
+        inStock: (utilService.getRandomIntInclusive(0, 9) % 2 === 1) ? true : false,
         labels: [labelsList[utilService.getRandomIntInclusive(0, labelsList.length - 1)], labelsList[utilService.getRandomIntInclusive(0, labelsList.length - 1)]],
         createdAt: Date.now() - utilService.getRandomIntInclusive(100000, 999999999)
     }
@@ -64,5 +63,5 @@ function getRandomToy() {
 
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '', isInStock: 'all', labels: '', sortBy: '' }
+    return { txt: '', maxPrice: '', inStock: 'all', labels: 'all', sortBy: '' }
 }

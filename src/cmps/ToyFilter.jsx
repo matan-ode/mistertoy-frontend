@@ -47,7 +47,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     value={filterByToEdit.labels}
                     onChange={handleChange}
                 >
-                    <option value=""></option>
+                    <option value="all"></option>
                     <option value="On wheels">On wheels</option>
                     <option value="Box game">Box game</option>
                     <option value="Art">Art</option>
@@ -59,10 +59,10 @@ export function ToyFilter({ filterBy, onSetFilter }) {
 
                 </select>
 
-                <label htmlFor="isInStock">Status:</label>
-                <select id="isInStock"
-                    name="isInStock"
-                    value={filterByToEdit.isInStock}
+                <label htmlFor="inStock">Status:</label>
+                <select id="inStock"
+                    name="inStock"
+                    value={filterByToEdit.inStock}
                     onChange={handleChange}
                 >
                     <option value="all">All</option>
