@@ -78,11 +78,11 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                         multiple
                         onChange={handleChange}
                         input={<OutlinedInput label="Labels" />}
-                        renderValue={(selected) => selected.join(', ')}
+                        renderValue={(selected) => Array.isArray(selected)? selected.join(', ') : selected}
                         MenuProps={MenuProps}
 
                         name="labels"
-                        value={filterByToEdit.labels || []}
+                        value={[...filterByToEdit.labels]}
                     >
                         {toyService.getLabelsList().map((label) => (
                             <MenuItem key={label} value={label}>
