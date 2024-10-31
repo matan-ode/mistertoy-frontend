@@ -1,0 +1,9 @@
+.toy-edit button{
+    margin-top: 1em;
+}
+
+.form-edit-toy{
+    display: flex;
+    flex-direction: column;
+    width: 15em;
+}

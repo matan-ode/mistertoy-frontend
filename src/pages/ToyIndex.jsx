@@ -11,6 +11,9 @@ import { loadToys, removeToy, removeToyOptimistic, saveToy, setFilterBy } from '
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+
 export function ToyIndex() {
 
     const dispatch = useDispatch()
@@ -52,10 +55,11 @@ export function ToyIndex() {
 
     return (
         <div>
-            <h3>Toys App</h3>
-            <main>
-                <Link to="/toy/edit">Add Toy</Link>
-                <button className='add-btn' onClick={onAddToy}>Add Random Toy</button>
+            <main style={{ marginBlockStart: "1em" }}>
+                <Stack className="add-btns-container" spacing={2} direction="row" >
+                    <Button variant="contained"><Link to="/toy/edit">Add Toy</Link></Button>
+                    <Button variant="contained" className='add-btn' onClick={onAddToy}>Add Random Toy</Button >
+                </Stack>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 {!isLoading
                     ? <ToyList

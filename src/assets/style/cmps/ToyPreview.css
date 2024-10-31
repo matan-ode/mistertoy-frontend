@@ -1,14 +1,32 @@
-.car-preview {
+.toy-preview {
     text-align: center;
     padding: 0.3em;
     display: flex;
     flex-direction: column;
+    border-radius: 2em;
 }
-.car-preview h4{
+
+.toy-preview h4 {
     text-transform: capitalize;
     color: black;
 }
 
-.car-preview img {
+.toy-preview img {
     max-width: 100px;
+}
+
+.toy-preview a {
+    font-family: lato;
+    background-color: var(--clr2bg-light);
+    padding: 0.3em;
+    border-radius: 1em;
+    transition: 200ms;
+}
+
+.toy-preview a:hover {
+    opacity: 0.5;
+}
+
+.toy-preview-card{
+    margin-bottom: 0.7em;
 }
