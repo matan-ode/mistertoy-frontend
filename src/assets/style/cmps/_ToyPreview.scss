@@ -1,0 +1,34 @@
+.toy-preview {
+    text-align: center;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2em;
+
+    h4 {
+        text-transform: capitalize;
+        color: black;
+    }
+
+    img {
+        max-width: em(100px);
+    }
+
+    a {
+        font-family: lato, sans-serif;
+        background-color: $clr2bg-light;
+        padding: 0.3em;
+        border-radius: 1em;
+        transition: 200ms;
+    }
+
+    a {
+        &hover {
+            opacity: 0.5;
+        }
+    }
+
+    .toy-preview-card {
+        margin-bottom: 0.7em;
+    }
+}

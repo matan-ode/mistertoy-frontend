@@ -8,13 +8,14 @@ export function AppFooter() {
 
 
     return (
-        <footer className='app-footer'>
+        <footer className='app-footer full'>
             <h5>
                 Currently {toysLength} toys in the shop
             </h5>
             <p>
                 Coffeerights
             </p>
+            {/* <button className="btn btn-dark">Check mixin</button> */}
         </footer>
     )
 }

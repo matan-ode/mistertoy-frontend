@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  color: $gray3;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: .5em 0 .5em;
+  font-family: lato, sans-serif;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+
+  &.active {
+    text-decoration: underline;
+  }
+}
+
+
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+  max-width: 100%
+}
+
+/* Simple and useful CSS Debugging Technique */
+.debug * {
+  outline: 1px solid gold
+}
+
+button {
+  font-family: lato, sans-serif;
+}
+
+a {
+  font-family: lato, sans-serif;
+
+}
+
+p {
+  font-family: lato, sans-serif;
+}
+
+label {
+  font-family: lato, sans-serif;
+}
+
+input {
+  font-family: lato, sans-serif;
+
+  :focus {
+    background-color: $clr1bg;
+    transition: background-color 1s;
+  }
+}
+
+.btn {
+  @include btn;
+
+  &-dark {
+    @include btn($type: dark);
+  }
+
+  &-light {
+    @include btn($type: light);
+  }
+}

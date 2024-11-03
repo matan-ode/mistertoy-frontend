@@ -1,0 +1,29 @@
+.user-msg {
+    font-family: lato, sans-serif;
+    display: flex;
+    gap: 1em;
+    flex-direction: row-reverse;
+    align-items: center;
+    background-color: lightgray;
+    padding: 1.5em 2.5em;
+    position: fixed;
+    bottom: 0;
+    right: 1em;
+    color: white;
+    border-radius: em(2px);
+    font-size: 1.1em;
+
+    &.success {
+        background-color: $clr1;
+    }
+
+    &.error {
+        background-color: $clr2;
+    }
+
+    button {
+        font-size: .8em;
+        float: right;
+        margin: .5em;
+    }
+}

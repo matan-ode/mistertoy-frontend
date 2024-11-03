@@ -1,0 +1,15 @@
+button {
+    cursor: pointer;
+    background-color: $clr2bg;
+    margin: 0.5em;
+    border: 0;
+    padding: 0.5em 0.8em;
+    border-radius: em(4px);
+    transition: .3s;
+
+    &:hover {
+        background-color: $clr2;
+        color: white;
+    }
+}
+

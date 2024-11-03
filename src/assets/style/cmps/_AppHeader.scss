@@ -1,0 +1,52 @@
+.app-header {
+    background-color: $clr1;
+    color: $clr1bg;
+    padding-block: 1em;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.burger {
+    @include for-normal-layout {
+        display: none;
+    }
+}
+
+.app-nav {
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: -100%;
+    background-color: $clr1;
+    align-items: center;
+    gap: 2em;
+    padding: 1em;
+    font-size: 1.2em;
+    z-index: 2;
+
+    &.show-menu {
+        top: 4em;
+        border-radius: 1em;
+    }
+
+    @include for-normal-layout {
+        position: static;
+        flex-direction: row;
+
+        gap: em(15px);
+        font-size: 1.2em;
+        grid-column: 6;
+        gap: em(15px);
+        grid-column: 6;
+
+    }
+
+    @include for-wide-layout {}
+}

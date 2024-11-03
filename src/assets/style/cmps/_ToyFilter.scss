@@ -1,0 +1,25 @@
+.toy-filter {
+    background-color: $clr2bg;
+    padding: 1em;
+    border-radius: 2em;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+
+        div {
+            width: 100%;
+        }
+    }
+
+    @include for-normal-layout {
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-items: center;
+            align-items: center;
+        }
+    }
+}
