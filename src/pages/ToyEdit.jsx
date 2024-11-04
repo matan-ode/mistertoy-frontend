@@ -48,17 +48,26 @@ export function ToyEdit() {
 
     console.log(touched)
 
-    function loadToy() {
-        toyService.getById(toyId)
-            .then(toy => {
-                values.name = toy.name
-                values.price = toy.price
-                setToyToEdit(toy)
-            })
-            .catch(err => {
-                console.log('Had issues in toy edit', err)
-                navigate('/toy')
-            })
+    async function loadToy() {
+        try {
+            const toy = await toyService.getById(toyId)
+            values.name = toy.name
+            values.price = toy.price
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issues in toy edit', err)
+            navigate('/toy')
+        }
+        // toyService.getById(toyId)
+        //     .then(toy => {
+        //         values.name = toy.name
+        //         values.price = toy.price
+        //         setToyToEdit(toy)
+        //     })
+        //     .catch(err => {
+        //         console.log('Had issues in toy edit', err)
+        //         navigate('/toy')
+        //     })
     }
 
     // function handleChange({ target }) {
@@ -69,21 +78,23 @@ export function ToyEdit() {
 
     function onSaveToy() {
         // ev.preventDefault()
+        console.log('val', values);
+        console.log('toy to ed', toyToEdit)
+
         if (!toyToEdit.price) toyToEdit.price = 1000
         setToyToEdit(toyToSave => {
             toyToSave.name = values.name
             toyToSave.price = values.price
-            return toyToSave
+            return saveToy(toyToSave)
+                .then(() => {
+                    showSuccessMsg('Toy Saved!')
+                    navigate('/toy')
+                })
+                .catch(err => {
+                    console.log('Had issues in toy details', err)
+                    showErrorMsg('Had issues in toy details')
+                })
         })
-        saveToy(toyToEdit)
-            .then(() => {
-                showSuccessMsg('Toy Saved!')
-                navigate('/toy')
-            })
-            .catch(err => {
-                console.log('Had issues in toy details', err)
-                showErrorMsg('Had issues in toy details')
-            })
     }
 
 

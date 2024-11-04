@@ -32,25 +32,23 @@ export function ToyIndex() {
         setFilterBy(filterBy)
     }
 
-    function onRemoveToy(toyId) {
-        removeToyOptimistic(toyId)
-            .then(() => {
-                showSuccessMsg('Toy removed')
-            })
-            .catch(err => {
-                showErrorMsg('Cannot remove toy')
-            })
+    async function onRemoveToy(toyId) {
+        try {
+            const removedToy = await removeToyOptimistic(toyId)
+            showSuccessMsg('Toy removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove toy')
+        }
     }
 
-    function onAddToy() {
+    async function onAddToy() {
         const toyToSave = toyService.getRandomToy()
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy added (id: ${savedToy._id})`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot add toy')
-            })
+        try {
+            const savedToy = await saveToy(toyToSave)
+            showSuccessMsg(`Toy added (id: ${savedToy._id})`)
+        } catch (err) {
+            showErrorMsg('Cannot add toy')
+        }
     }
 
     return (

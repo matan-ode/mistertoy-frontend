@@ -15,16 +15,22 @@ export function AppHeader() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     function onLogout() {
-        logout()
-            .then(() => {
-                showSuccessMsg('logout successfully')
-            })
-            .catch((err) => {
-                showErrorMsg('OOPs try again')
-            })
+        try {
+            logout()
+            showSuccessMsg('logout successfully')
+        } catch (err) {
+            showErrorMsg('OOPs try again')
+        }
+        // logout()
+        //     .then(() => {
+        //         showSuccessMsg('logout successfully')
+        //     })
+        //     .catch((err) => {
+        //         showErrorMsg('OOPs try again')
+        //     })
     }
 
-    
+
 
     function onBurger() {
         setIsMenuOpen(burger => !burger)
