@@ -12,7 +12,6 @@ import { AppHeader } from './cmps/AppHeader'
 import { AboutUs } from './pages/AboutUs'
 import { AppFooter } from './cmps/AppFooter'
 import { Dashboard } from './pages/Dashboard'
-import { Login } from './pages/Login'
 
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
                             <Route element={<ToyIndex />} path="/toy" />
                             <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
                             <Route element={<ToyDetails />} path="/toy/:toyId" />
-                            <Route element={<Login />} path="/login" />
                         </Routes>
                     </main>
                     <AppFooter />

@@ -1,34 +1,33 @@
 import { UserMsg } from './UserMsg.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { yellow } from '@mui/material/colors'
 
 import logoUrl from '../../src/assets/img/logo.png'
 import { useState } from 'react'
+import { LoginSignup } from './LoginSignup.jsx'
 
 // const { NavLink } = ReactRouterDOM
 // const { useSelector, useDispatch } = ReactRedux
 
 export function AppHeader() {
+    const user = useSelector((storeState) => storeState.userModule.loggedinUser)
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    function onLogout() {
+    async function onLogout() {
         try {
-            logout()
-            showSuccessMsg('logout successfully')
+          await logout()
+          showSuccessMsg('Logout successfully')
+          navigate('/')
         } catch (err) {
-            showErrorMsg('OOPs try again')
+          console.log('err:', err)
+          showErrorMsg('Cannot logout')
         }
-        // logout()
-        //     .then(() => {
-        //         showSuccessMsg('logout successfully')
-        //     })
-        //     .catch((err) => {
-        //         showErrorMsg('OOPs try again')
-        //     })
-    }
+      }
 
 
 
@@ -52,8 +51,20 @@ export function AppHeader() {
                     <NavLink to="/about" >About</NavLink>
                     <NavLink to="/toy" >Toys</NavLink>
                     <NavLink to="/dashboard" >Dashboard</NavLink>
-                    <NavLink to="/login" >Login</NavLink>
                 </nav>
+                {user && (
+                    <section className="user-info">
+                        {/* <p>
+                            {user.fullname} <span>${user.score.toLocaleString()}</span>
+                        </p> */}
+                        <button onClick={onLogout}>Logout</button>
+                    </section>
+                )}
+                {!user && (
+                    <section className="user-info">
+                        <LoginSignup />
+                    </section>
+                )}
             </section>
             <UserMsg />
         </header>
