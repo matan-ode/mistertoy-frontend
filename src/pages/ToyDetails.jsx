@@ -3,12 +3,19 @@ import { toyService } from "../services/toy.service.js"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { Button } from "@mui/material"
 import { showSuccessMsg } from "../services/event-bus.service.js"
+import { useSelector } from "react-redux"
+import { ReviewEdit } from "../cmps/ReviewEdit.jsx"
+import { loadReviews } from "../store/actions/review.actions.js"
+import { ReviewList } from "../cmps/ReviewList.jsx"
 
 // const { useEffect, useState } = React
 // const { Link, useParams } = ReactRouterDOM
 
 
 export function ToyDetails() {
+    const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
+    const reviews = useSelector(storeState => storeState.reviewModule.reviews)
+
     const [msg, setMsg] = useState(toyService.getEmptyMsg())
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
@@ -16,6 +23,7 @@ export function ToyDetails() {
 
     useEffect(() => {
         if (toyId) loadToy()
+        loadReviews()
     }, [toyId])
 
     async function loadToy() {
@@ -79,27 +87,38 @@ export function ToyDetails() {
             </p> */}
             <ul className="toy-msgs">
                 {toy.msgs ? toy.msgs.map((msg) => (
-                    <li  key={msg.id} className="toy-comment">
+                    <li key={msg.id} className="toy-comment">
                         <div>{msg.txt ? msg.txt : 'No comments'}</div>
                         <div>By: {msg.by.fullname ? msg.by.fullname : ''}</div>
-                        <button type="button" onClick={() => onRemoveMsg(msg.id)}>
-                            X
-                        </button>
+                        {loggedInUser.isAdmin ?
+                            <button type="button" onClick={() => onRemoveMsg(msg.id)}>
+                                X
+                            </button>
+                            : ''}
                     </li>
                 )) : ''}
-                <form className="login-form" onSubmit={onSaveMsg}>
-                    <input
-                        type="text"
-                        name="txt"
-                        value={txt}
-                        placeholder="Enter msg"
-                        onChange={handleMsgChange}
-                        required
-                        autoFocus
-                    />
-                    <button>Send</button>
-                </form>
             </ul>
+            <form className="login-form" onSubmit={onSaveMsg}>
+                <input
+                    type="text"
+                    name="txt"
+                    value={txt}
+                    placeholder="Enter msg"
+                    onChange={handleMsgChange}
+                    required
+                    autoFocus
+                />
+                <button>Send</button>
+            </form>
+            <div className="review-index">
+                <h2>Reviews and Gossip</h2>
+                {loggedInUser && <ReviewEdit toyId={toyId} />}
+                <ReviewList
+                    reviews={reviews}
+                    toyId={toyId}
+                  />
+            </div>
+            {/* <ReviewEdit toyId={toyId} /> */}
         </section>
     )
 }

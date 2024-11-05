@@ -9,11 +9,13 @@ export const CHANGE_BY = 'CHANGE_BY'
 //* User
 export const SET_USER = 'SET_USER'
 export const SET_USER_SCORE = 'SET_USER_SCORE'
+export const SET_USERS = 'SET_USERS'
 
 
 const initialState = {
     count: 105,
-    loggedInUser: userService.getLoggedinUser()
+    loggedInUser: userService.getLoggedinUser(),
+    users: [],
 }
 
 export function userReducer(state = initialState, action = {}) {
@@ -38,5 +40,8 @@ export function userReducer(state = initialState, action = {}) {
             return { ...state, loggedInUser }
         default:
             return state;
+        case SET_USERS:
+            newState = { ...state, users: action.users }
+            break
     }
 }
