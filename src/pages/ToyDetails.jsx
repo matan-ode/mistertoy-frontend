@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { ReviewEdit } from "../cmps/ReviewEdit.jsx"
 import { addReview, loadReviews } from "../store/actions/review.actions.js"
 import { ReviewList } from "../cmps/ReviewList.jsx"
+import { ChatRoom } from "../cmps/ChatRoom.jsx"
 
 // const { useEffect, useState } = React
 // const { Link, useParams } = ReactRouterDOM
@@ -16,7 +17,7 @@ export function ToyDetails() {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 
-    const [reviewToEdit, setReviewToEdit] = useState({txt:''})
+    const [reviewToEdit, setReviewToEdit] = useState({ txt: '' })
 
     const [msg, setMsg] = useState(toyService.getEmptyMsg())
     const [toy, setToy] = useState(null)
@@ -72,17 +73,17 @@ export function ToyDetails() {
     }
 
     async function onAddReview(ev) {
-		ev.preventDefault()
-		if (!reviewToEdit.txt || !reviewToEdit.userId) return alert('All fields are required')
+        ev.preventDefault()
+        if (!reviewToEdit.txt || !reviewToEdit.userId) return alert('All fields are required')
 
-		try {
-			await addReview(reviewToEdit)
-			showSuccessMsg('Review added')
-			setReviewToEdit(preReview => ({...preReview , txt: ''}))
-		} catch (err) {
-			showErrorMsg('Cannot add review')
-		}
-	}
+        try {
+            await addReview(reviewToEdit)
+            showSuccessMsg('Review added')
+            setReviewToEdit(preReview => ({ ...preReview, txt: '' }))
+        } catch (err) {
+            showErrorMsg('Cannot add review')
+        }
+    }
 
     const { txt } = msg
 
@@ -97,6 +98,9 @@ export function ToyDetails() {
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi voluptas cumque tempore, aperiam sed dolorum rem! Nemo quidem, placeat perferendis tempora aspernatur sit, explicabo veritatis corrupti perspiciatis repellat, enim quibusdam!</p>
             <Button variant="contained"><Link to={`/toy/edit/${toy._id}`}>Edit</Link></Button> &nbsp;
             <Button variant="contained"><Link to={`/toy`}>Back</Link></Button>
+
+            <ChatRoom handleMsgChange={handleMsgChange} onSaveMsg={onSaveMsg} msg={msg} setMsg={setMsg} toyId={toyId} />
+
             {/* <p>
                 <Link to="/toy/nJ5L4">Next Toy</Link>
             </p> */}
@@ -131,7 +135,7 @@ export function ToyDetails() {
                 <ReviewList
                     reviews={reviews}
                     toyId={toyId}
-                  />
+                />
             </div>
             {/* <ReviewEdit toyId={toyId} /> */}
         </section>

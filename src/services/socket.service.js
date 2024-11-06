@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import { userService } from './user'
+import { userService } from '../services/user.service'
 
 export const SOCKET_EVENT_ADD_MSG = 'chat-add-msg'
 export const SOCKET_EMIT_SEND_MSG = 'chat-send-msg'
@@ -52,7 +52,6 @@ function createSocketService() {
     terminate() {
       socket = null
     },
-
   }
   return socketService
 }
