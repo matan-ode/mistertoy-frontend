@@ -59,8 +59,8 @@ function getEmptyCredentials() {
 //     return userToSave
 // }
 
-;(async ()=>{
-    await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123', isAdmin: false})
-    await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', isAdmin: true})
-    await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', isAdmin: false})
-})()
+// ;(async ()=>{
+//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123', isAdmin: false})
+//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', isAdmin: true})
+//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', isAdmin: false})
+// })()

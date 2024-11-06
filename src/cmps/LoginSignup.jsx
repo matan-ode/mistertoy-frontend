@@ -10,7 +10,7 @@ function getEmptyCredentials() {
   }
 }
 
-export function LoginSignup() {
+export function LoginSignup({setLoggedinUser}) {
   const [credentials, setCredentials] = useState(getEmptyCredentials())
   const [isSignupState, setIsSignupState] = useState(false)
 
@@ -39,6 +39,7 @@ export function LoginSignup() {
         showErrorMsg('Cannot login')
       }
     }
+    setLoggedinUser(true)
   }
 
   function onToggleSignupState() {
