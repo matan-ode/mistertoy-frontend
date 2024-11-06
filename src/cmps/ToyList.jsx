@@ -3,6 +3,8 @@ import { ToyPreview } from "./ToyPreview.jsx"
 
 export function ToyList({ toys, onRemoveToy, onEditToy }) {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
+    console.log(loggedInUser);
+
 
     // console.log('toys:', toys)
     if (!toys) return <div>Loading</div>
@@ -11,7 +13,7 @@ export function ToyList({ toys, onRemoveToy, onEditToy }) {
             {toys.map(toy =>
                 <li className="toy-preview" key={toy._id}>
                     <ToyPreview toy={toy} />
-                    {loggedInUser.isAdmin ?
+                    {loggedInUser && !!loggedInUser.isAdmin ?
                         <div>
                             <button onClick={() => onRemoveToy(toy._id)}>x</button>
                         </div>

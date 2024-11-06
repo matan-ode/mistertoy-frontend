@@ -12,7 +12,7 @@ export function ToyPreview({ toy }) {
             <p>Price: <span>${toy.price.toLocaleString()}</span></p>
             <p>Labels: <span>{Array.isArray(toy.labels) ? toy.labels.join(', ').toLocaleString() : toy.labels.toLocaleString()}</span></p>
             <hr />
-            {loggedInUser.isAdmin ?
+            {loggedInUser && loggedInUser.isAdmin ?
                 <Link to={`/toy/edit/${toy._id}`}>Edit</Link>
                 :
                 ''}
