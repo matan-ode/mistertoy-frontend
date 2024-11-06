@@ -42,6 +42,7 @@ export function AppHeader() {
             <NavLink to="/about" >About</NavLink>
             <NavLink to="/toy" >Toys</NavLink>
             <NavLink to="/dashboard" >Dashboard</NavLink>
+            <NavLink to="/explore" >Explore</NavLink>
 
             {isLoggedinUser ? <NavLink to={`/user/${user ? user._id : ''}`}>Profile</NavLink>
                 : ''}

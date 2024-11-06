@@ -13,6 +13,7 @@ import { AboutUs } from './pages/AboutUs'
 import { AppFooter } from './cmps/AppFooter'
 import { Dashboard } from './pages/Dashboard'
 import { UserDetails } from './pages/UserDetails'
+import { ReviewExplore } from './pages/ReviewExplore'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                             <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
                             <Route element={<ToyDetails />} path="/toy/:toyId" />
                             <Route element={<UserDetails />} path="/user/:userId" />
+                            <Route element={<ReviewExplore />} path="/explore" />
                         </Routes>
                     </main>
                     <AppFooter />
