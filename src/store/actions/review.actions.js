@@ -20,6 +20,7 @@ export async function addReview(review) {
         console.log(addedReview);
         
         store.dispatch(getActionAddReview(addedReview))
+        return addedReview
         // const { score } = addedReview.user
         // store.dispatch({ type: SET_SCORE, score })
     } catch (err) {

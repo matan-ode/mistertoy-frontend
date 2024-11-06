@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { toyService } from "../services/toy.service.js"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { Button } from "@mui/material"
-import { showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { useSelector } from "react-redux"
 import { ReviewEdit } from "../cmps/ReviewEdit.jsx"
-import { loadReviews } from "../store/actions/review.actions.js"
+import { addReview, loadReviews } from "../store/actions/review.actions.js"
 import { ReviewList } from "../cmps/ReviewList.jsx"
 
 // const { useEffect, useState } = React
@@ -16,6 +16,8 @@ export function ToyDetails() {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 
+    const [reviewToEdit, setReviewToEdit] = useState({txt:''})
+
     const [msg, setMsg] = useState(toyService.getEmptyMsg())
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
@@ -24,7 +26,7 @@ export function ToyDetails() {
     useEffect(() => {
         if (toyId) loadToy()
         loadReviews()
-    }, [toyId])
+    }, [toyId, reviewToEdit])
 
     async function loadToy() {
         // toyService.getById(toyId)
@@ -69,6 +71,19 @@ export function ToyDetails() {
         showSuccessMsg('Msg removed!')
     }
 
+    async function onAddReview(ev) {
+		ev.preventDefault()
+		if (!reviewToEdit.txt || !reviewToEdit.userId) return alert('All fields are required')
+
+		try {
+			await addReview(reviewToEdit)
+			showSuccessMsg('Review added')
+			setReviewToEdit(preReview => ({...preReview , txt: ''}))
+		} catch (err) {
+			showErrorMsg('Cannot add review')
+		}
+	}
+
     const { txt } = msg
 
 
@@ -112,7 +127,7 @@ export function ToyDetails() {
             </form>
             <div className="review-index">
                 <h2>Reviews and Gossip</h2>
-                {loggedInUser && <ReviewEdit toyId={toyId} />}
+                {loggedInUser && <ReviewEdit reviewToEdit={reviewToEdit} setReviewToEdit={setReviewToEdit} onAddReview={onAddReview} toyId={toyId} />}
                 <ReviewList
                     reviews={reviews}
                     toyId={toyId}

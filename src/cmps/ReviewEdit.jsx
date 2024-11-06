@@ -5,10 +5,9 @@ import { addReview } from "../store/actions/review.actions.js"
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
-export function ReviewEdit({ toyId }) {
+export function ReviewEdit({ toyId , onAddReview, reviewToEdit, setReviewToEdit}) {
 	const users = useSelector(storeState => storeState.userModule.users)
 	const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
-	const [reviewToEdit, setReviewToEdit] = useState({ txt: '', userId: loggedInUser._id || '' })
 
 
 	useEffect(() => {
@@ -25,18 +24,7 @@ export function ReviewEdit({ toyId }) {
 		setReviewToEdit({ ...reviewToEdit, [name]: value })
 	}
 
-	async function onAddReview(ev) {
-		ev.preventDefault()
-		if (!reviewToEdit.txt || !reviewToEdit.userId) return alert('All fields are required')
 
-		try {
-			await addReview(reviewToEdit)
-			showSuccessMsg('Review added')
-			setReviewToEdit(preReview => ({...preReview , txt: ''}))
-		} catch (err) {
-			showErrorMsg('Cannot add review')
-		}
-	}
 	console.log(reviewToEdit);
 
 	return <form className="review-edit" onSubmit={onAddReview}>

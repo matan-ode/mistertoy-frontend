@@ -20,7 +20,7 @@ export function ReviewList({ reviews, toyId }) {
                 <section>
                     <ul className="list review-list">
                         {reviews.map(review =>
-                            review.toy._id === toyId ?
+                            (review.toy._id? (review.toy._id === toyId) : (review.toyId === toyId) )?
                                 <li key={review._id}>
                                     <ReviewPreview review={review} />
                                 </li> : '')}
